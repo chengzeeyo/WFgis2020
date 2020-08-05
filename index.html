@@ -1,35 +1,151 @@
-<html>
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>JS左侧下拉二级菜单代码 - 源码之家</title>
 
-  <head>
-    <meta charset="utf-8">
-    <title>Angular 2 实例 - 菜鸟教程(runoob.com)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="CSS/styles.css">
+<script src="app/adapter.js"></script> <!--rem适配js-->
 
-    <!-- 1. 载入库 -->
-    <!-- IE 需要 polyfill -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
+<link rel="stylesheet" href="CSS/base.css"> <!--初始化文件-->
+<link rel="stylesheet" href="CSS/menu.css"> <!--主样式-->
 
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+</head>
+<body>
 
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="node_modules/@angular/core/bundles/core.umd.js"></script>
-    <script src="node_modules/@angular/common/bundles/common.umd.js"></script>
-    <script src="node_modules/@angular/compiler/bundles/compiler.umd.js"></script>
-    <script src="node_modules/@angular/platform-browser/bundles/platform-browser.umd.js"></script>
-    <script src="node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js"></script>
+<div id="menu">
+    <!--隐藏菜单-->
+    <div id="ensconce">
+        <h2>
+            <img src="Image/show.png" alt="">
+            自然资源部门协同管理平台
+        </h2>
+    </div>
 
-    <!-- 2. 载入 'modules' -->
-    <script src='app/app.component.js'></script>
-    <script src='app/app.module.js'></script>
-    <script src='app/main.js'></script>
+    <!--显示菜单-->
+    <div id="open">
+        <div class="navH">
+            WFgis
+            <span><img class="obscure" src="Image/obscure.png" alt=""></span>
+        </div>
+        <div class="navBox">
+            <ul>
+                <li>
+                    <h2 class="obtain">不动产数据<i></i></h2>
+                    <div class="secondary">
+                        <h3>故宫</h3>
+                        <h3>十三陵</h3>
+                        <h3>圆明园</h3>
+                        <h3>长城</h3>
+                        <h3>雍和宫</h3>
+                        <h3>天坛公园</h3>
+                    </div>
+                </li>
+                <li>
+                    <h2 class="obtain">三调数据<i></i></h2>
+                    <div class="secondary">
+                        <h3>栖霞寺</h3>
+                        <h3>夫子庙</h3>
+                        <h3>海底世界</h3>
+                        <h3>中山陵</h3>
+                        <h3>乌衣巷</h3>
+                        <h3>音乐台</h3>
+                    </div>
+                </li>
+                <li>
+                    <h2 class="obtain">二调数据<i></i></h2>
+                    <div class="secondary">
+                        <h3>东方明珠</h3>
+                        <h3>外滩</h3>
+                        <h3>豫园</h3>
+                        <h3>文庙</h3>
+                        <h3>世博园</h3>
+                        <h3>田子坊</h3>
+                    </div>
+                </li>
+                <li>
+                    <h2 class="obtain">基本农田数据<i></i></h2>
+                    <div class="secondary">
+                        <h3>华侨城</h3>
+                        <h3>观澜湖</h3>
+                        <h3>世界之窗</h3>
+                        <h3>东门老街</h3>
+                        <h3>七娘山</h3>
+                        <h3>光明农场</h3>
+                    </div>
+                </li>
+                <li>
+                    <h2 class="obtain">空间规划数据<i></i></h2>
+                    <div class="secondary">
+                        <h3>白云山</h3>
+                        <h3>长隆</h3>
+                        <h3>黄花岗公园</h3>
+                        <h3>中山纪念堂</h3>
+                        <h3>华南植物园</h3>
+                        <h3>南沙湿地公园</h3>
+                    </div>
+                </li>
+                 <li>
+                    <h2 class="obtain">矿产资源管理<i></i></h2>
+                    <div class="secondary">
+                        <h3>白云山</h3>
+                        <h3>长隆</h3>
+                        <h3>黄花岗公园</h3>
+                        <h3>中山纪念堂</h3>
+                        <h3>华南植物园</h3>
+                        <h3>南沙湿地公园</h3>
+                    </div>
+                </li>
+                 <li>
+                    <h2 class="obtain">执法监察管理<i></i></h2>
+                    <div class="secondary">
+                        <h3>白云山</h3>
+                        <h3>长隆</h3>
+                        <h3>黄花岗公园</h3>
+                        <h3>中山纪念堂</h3>
+                        <h3>华南植物园</h3>
+                        <h3>南沙湿地公园</h3>
+                    </div>
+                </li>
+                 <li>
+                    <h2 class="obtain">待建设<i></i></h2>
+                    <div class="secondary">
+                        <h3>白云山</h3>
+                        <h3>长隆</h3>
+                        <h3>黄花岗公园</h3>
+                        <h3>中山纪念堂</h3>
+                        <h3>华南植物园</h3>
+                        <h3>南沙湿地公园</h3>
+                    </div>
+                </li>
+                 <li>
+                    <h2 class="obtain">待建设<i></i></h2>
+                    <div class="secondary">
+                        <h3>白云山</h3>
+                        <h3>长隆</h3>
+                        <h3>黄花岗公园</h3>
+                        <h3>中山纪念堂</h3>
+                        <h3>华南植物园</h3>
+                        <h3>南沙湿地公园</h3>
+                    </div>
+                </li>
+                 <li>
+                    <h2 class="obtain">待建设<i></i></h2>
+                    <div class="secondary">
+                        <h3>白云山</h3>
+                        <h3>长隆</h3>
+                        <h3>黄花岗公园</h3>
+                        <h3>中山纪念堂</h3>
+                        <h3>华南植物园</h3>
+                        <h3>南沙湿地公园</h3>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-  </head>
-
-  <!-- 3. 显示应用 -->
-  <body>
-    <my-app>Loading...</my-app>
-  </body>
-
+<script src="app/menu.js"></script> <!--控制js-->
+</body>
 </html>
