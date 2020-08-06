@@ -4,9 +4,9 @@ a:link, a:visited, ins { text-decoration: none; }
 img{border:none}
 
 body { background-color: #FFFFFF; font-family: "微软雅黑", "宋体", "黑体", Arial; }
-.header { position: relative; height: 90px; background: url(/Image/line-solid.gif) repeat-x bottom; width: 960px; margin: 0 auto; z-index: 100; }
+.header { position: relative; height: 90px; background: url(Image/line-solid.gif) repeat-x bottom; width: 960px; margin: 0 auto; z-index: 100; }
 
-.menu { height: 40px; background: url(/Image/menu_bg_1.gif) no-repeat -99px bottom; z-index: 100; background-position: 0px 100%; position: absolute; top: 50px; right: 0; padding-right: 1px; }
+.menu { height: 40px; background: url(menu_bg_1.gif) no-repeat -99px bottom; z-index: 100; background-position: 0px 100%; position: absolute; top: 50px; right: 0; padding-right: 1px; }
 .menu li { float: left; font-size: 14px; text-align: center; line-height: 18px; padding: 0; }
 .menu li.lihover, .menu li.licurrent { padding-bottom: 15px; border-bottom: 3px solid #FE7700; }
 .menu li a { padding: 2px 35px; border-right: 1px solid #D7D7D7; color: #242424; font-weight: bold; margin: 0; border-left: none; display: inline-block; font-size: 14px; width: 30px; }
@@ -16,7 +16,7 @@ body { background-color: #FFFFFF; font-family: "微软雅黑", "宋体", "黑体
 .li_3_content { position: absolute; top: 20px; left: 0px; line-height: 40px; z-index: 99; display: none; height: 188px; *top: 18px; width: 130px; }
 .li_3_content a:hover { color: #f18336 !important; }
 .li_3_content dt { height: 17px; border-bottom: 3px solid #FE7700; *height: 19px; line-height: 17px; }
-.li_3_content dd { border-left: 1px solid #E6E4E3; border-right: 1px solid #E6E4E3; padding: 0 8px; background: #ffffff url(/Image/menu.gif) no-repeat bottom; }
+.li_3_content dd { border-left: 1px solid #E6E4E3; border-right: 1px solid #E6E4E3; padding: 0 8px; background: #ffffff url(menu.gif) no-repeat bottom; }
 .li_3_content dd a { text-align: center; padding: 0; border-right: none; color: #666; font-weight: normal; width: auto; }
 .li_3_content dd.lastItem { background-image: none; border-bottom: 1px solid #E6E4E3; }
 .li_3_content dd.lastItem a { border-bottom: none; }
