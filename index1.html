@@ -2,19 +2,23 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>JS左侧下拉二级菜单代码 - 源码之家</title>
-
+<title>WFgis</title>
+<style>
+</style>
 <script src="app/adapter.js"></script> <!--rem适配js-->
-
 <link rel="stylesheet" href="CSS/base.css"> <!--初始化文件-->
 <link rel="stylesheet" href="CSS/menu.css"> <!--主样式-->
-
+<link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css"/>
+<script src="https://js.arcgis.com/4.16/"></script>
+<script src="app/arcgis_js_budongchan.js"></script>
+<link rel="stylesheet" href="CSS/budongchan.css">
 </head>
-<body>
 
-<div id="menu">
+<body>
+<!--<div id="viewDiv">-->
+    <div id="menu">
     <!--隐藏菜单-->
     <div id="ensconce">
         <h2>
@@ -22,7 +26,6 @@
             自然资源部门协同管理平台
         </h2>
     </div>
-
     <!--显示菜单-->
     <div id="open">
         <div class="navH">
@@ -34,7 +37,7 @@
                 <li>
                     <h2 class="obtain">不动产数据<i></i></h2>
                     <div class="secondary">
-                        <h3>故宫</h3>
+                        <h3>图层</h3>
                         <h3>十三陵</h3>
                         <h3>圆明园</h3>
                         <h3>长城</h3>
@@ -145,6 +148,8 @@
         </div>
     </div>
 </div>
+
+
 
 <script src="app/menu.js"></script> <!--控制js-->
 </body>
