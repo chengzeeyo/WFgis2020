@@ -12,13 +12,13 @@
 	<link rel="stylesheet" href="CSS/menu.css"> <!--主样式-->
 	<link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css"/>
 	<script src="https://js.arcgis.com/4.16/"></script>
-	<script src="app/arcgis_js_budongchan.js"></script>
 	<link rel="stylesheet" href="CSS/budongchan.css">
     <script src="app/menu.js"></script> <!--控制js-->
     <link rel="stylesheet" href="CSS/menutop.css" type="text/css"/>
     <script src="app/jquery-1.4.2.js" type="text/javascript"></script>
     <script src="app/jquery.backgroundpos.js" type="text/javascript"></script>
     <script src="app/menutop.js" type="text/javascript"></script>
+    <script src="Thematic%20data/不动产.js" type="text/javascript"></script>
 
     <style type="text/css">
         h1 {text-align: left}
@@ -70,13 +70,15 @@
 
     </style>
 
-<!--    <link-->
-<!--      rel="stylesheet"-->
-<!--      href="https://js.arcgis.com/4.16/esri/themes/light/main.css"-->
-<!--    />-->
-<!--    <script src="https://js.arcgis.com/4.16/"></script>-->
-
     <script>
+     var selectedFile; //选择文件
+	 var filename;   // 文件名字
+	 $("#fileSelector").change(function(){  //这是用户操作时候执行的函数
+	 	     selectedFile = document.getElementById('fileSelector').files[0]; //通过操作com拿到用户选择的文件，当然这里也可以操作jquery拿数据
+	 	     filename = selectedFile.name; //文件.name是获取源文件的文件名（固定用法）
+	 	     console.log("文件的名字是："+filename);//这行是日志
+		});
+
       require([
         "esri/Map",
         "esri/layers/GeoJSONLayer",
@@ -84,77 +86,46 @@
       ], function (Map, GeoJSONLayer, MapView) {
         // If GeoJSON files are not on the same domain as your website, a CORS enabled server
         // or a proxy is required.
-        const url =
-          "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
-
-        // Paste the url into a browser's address bar to download and view the attributes
-        // in the GeoJSON file. These attributes include:
-        // * mag - magnitude
-        // * type - earthquake or other event such as nuclear test
-        // * place - location of the event
-        // * time - the time of the event
-        // Use the Arcade Date() function to format time field into a human-readable format
-
-        const template = {
-          title: "Earthquake Info",
-          content: "Magnitude {mag} {type} hit {place} on {time}",
-          fieldInfos: [
-            {
-              fieldName: "time",
-              format: {
-                dateFormat: "short-date-short-time"
-              }
-            }
-          ]
-        };
-
-        const renderer = {
-          type: "simple",
-          field: "mag",
-          symbol: {
-            type: "simple-marker",
-            color: "orange",
-            outline: {
-              color: "white"
-            }
-          },
-          visualVariables: [
-            {
-              type: "size",
-              field: "mag",
-              stops: [
-                {
-                  value: 2.5,
-                  size: "4px"
-                },
-                {
-                  value: 8,
-                  size: "40px"
-                }
-              ]
-            }
-          ]
-        };
-
-        const geojsonLayer = new GeoJSONLayer({
-          url: url,
-          copyright: "USGS Earthquakes",
-          popupTemplate: template,
-          renderer: renderer //optional
-        });
 
         const map = new Map({
           basemap: "satellite",
-          layers: [geojsonLayer]
         });
 
         const view = new MapView({
           container: "viewDiv",
-          center: [-168, 46],
-          zoom: 3,
+          center: [110.6748, 30.19856],
+          zoom: 13,
           map: map
         });
+
+        //  隐藏HTML自带文件上传工具
+        const fileSelect = document.getElementById("file"),
+              fileElem = document.getElementById("fileSelector");
+
+            fileSelect.addEventListener("click", function (e) {
+              if (fileElem) {
+                fileElem.click();
+              }
+            }, false);
+
+              //有服务器后需重写,应先上传至服务器指定文件夹,再读取该文件,同时退出程序时应删除文件
+        var filename;   // 文件名字
+            $("#fileSelector").change(function () {  //这是用户操作时候执行的函数
+          selectedFile = document.getElementById('fileSelector').files[0]; //通过操作com拿到用户选择的文件，当然这里也可以操作jquery拿数据
+          filename = selectedFile.name; //文件.name是获取源文件的文件名（固定用法）
+          console.log("文件的名字是：" + filename);
+          const url = filename;
+
+          const geojsonLayer = new GeoJSONLayer({
+              url: url,
+              copyright: "五峰土家族自治县自然资源和规划局",
+          });
+
+          map.add(geojsonLayer);
       });
+
+      });
+
     </script>
   </head>
 
@@ -164,19 +135,19 @@
                <h1>五峰土家族自治县自然资源协同管理系统</h1>
                <h1>版本:1.0</h1>
 			    <ul class="menu">
-            <li class="current first"><a href="http://sc.chinaz.com/" target="_self">首页</a></li>
+            <li class="current first"><a href="主程序页面.html" target="_self">首页</a></li>
             <li><a href="#" target="_self">功能</a></li>
-            <li><a href="#" target="_self">下载</a></li>
-            <li class="li_3"><a class="noclick" href="http://sc.chinaz.com/" target="_blank">待建设</a>
+            <li><a href="Thematic%20data/文件上传.html" target="_blank">上传</a></li>
+            <li class="li_3"><a class="noclick" href="http://sc.chinaz.com/" target="_blank">数据转换</a>
                 <dl class="li_3_content">
                     <dt></dt>
-                    <dd><a href="http://sc.chinaz.com/" target="_blank"><span>待建设</span></a></dd>
+                    <dd><a href="http://mapshaper.org/" target="_blank"><span>shp转geojson</span></a></dd>
                     <dd><a href="http://sc.chinaz.com/" target="_blank"><span>待建设</span></a></dd>
                     <dd><a href="http://sc.chinaz.com/" target="_blank"><span>待建设</span></a></dd>
                     <dd class="lastItem"><a href="http://sc.chinaz.com/" target="_blank"><span>待建设</span></a></dd>
                 </dl>
             </li>
-            <li class=""><a class="noborder " href="#" target="_self">待建</a></li>
+            <li class=""><a class="noborder " href="#" target="_self">下载</a></li>
         </ul>
 <!--        <a href="http://sc.chinaz.com/">-->
 <!--            <img title="MIUI" class="miui_logo" src="Image/logo.jpeg" alt="网站logo" /></a>-->
@@ -202,12 +173,13 @@
                 <li>
                     <h2 class="obtain">不动产数据<i></i></h2>
                     <div class="secondary">
-                        <h3>图层</h3>
-                        <h3>上传数据</h3>
+                        <h3 id="budongchanbtn">图层</h3>
+                        <h3 id="file">导入文件</h3>
+                        <input id="fileSelector" type="file" name="filename" style="display: none" >
                         <h3>数据分析</h3>
                         <h3>待建设</h3>
                         <h3>待建设</h3>
-                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
                     </div>
                 </li>
                 <li>
@@ -218,7 +190,7 @@
                         <h3>待建设</h3>
                         <h3>待建设</h3>
                         <h3>待建设</h3>
-                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
                     </div>
                 </li>
                 <li>
@@ -229,7 +201,7 @@
                         <h3>待建设</h3>
                         <h3>待建设</h3>
                         <h3>待建设</h3>
-                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
                     </div>
                 </li>
                 <li>
@@ -240,7 +212,7 @@
                         <h3>待建设</h3>
                         <h3>待建设</h3>
                         <h3>待建设</h3>
-                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
                     </div>
                 </li>
                 <li>
@@ -251,7 +223,7 @@
                         <h3>待建设</h3>
                         <h3>待建设</h3>
                         <h3>待建设</h3>
-                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
                     </div>
                 </li>
                  <li>
@@ -262,7 +234,7 @@
                         <h3>待建设</h3>
                         <h3>待建设</h3>
                         <h3>待建设</h3>
-                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
                     </div>
                 </li>
                  <li>
@@ -273,7 +245,7 @@
                         <h3>待建设</h3>
                         <h3>待建设</h3>
                         <h3>待建设</h3>
-                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
                     </div>
                 </li>
                  <li>
@@ -284,7 +256,7 @@
                         <h3>待建设</h3>
                         <h3>待建设</h3>
                         <h3>待建设</h3>
-                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
                     </div>
                 </li>
                  <li>
@@ -295,7 +267,7 @@
                         <h3>待建设</h3>
                         <h3>待建设</h3>
                         <h3>待建设</h3>
-                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
                     </div>
                 </li>
                  <li>
@@ -306,7 +278,29 @@
                         <h3>待建设</h3>
                         <h3>待建设</h3>
                         <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
+                    </div>
+                </li>
+                <li>
+                    <h2 class="obtain">自然资源3D管理<i></i></h2>
+                    <div class="secondary">
+                        <h3>图层</h3>
                         <h3>待建设</h3>
+                        <h3>待建设</h3>
+                        <h3>待建设</h3>
+                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
+                    </div>
+                </li>
+                <li>
+                    <h2 class="obtain">自然资源深度学习模块<i></i></h2>
+                    <div class="secondary">
+                        <h3>图层</h3>
+                        <h3>待建设</h3>
+                        <h3>待建设</h3>
+                        <h3>待建设</h3>
+                        <h3>待建设</h3>
+                        <a href="主程序页面.html"><h3>返回首页</h3></a>
                     </div>
                 </li>
             </ul>

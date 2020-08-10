@@ -140,6 +140,7 @@
   -o-transition: all 0.6s ease;
   -ms-transition: all 0.6s ease;
 }
+
 #menu #open .navBox ul li .secondary h3 {
   padding: 0.1rem 0;
     text-align: center;

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--这个叫做引用js文件（所谓的js就是操作页面动态的语言，可以通过这个sdk的js调到腾讯的接口，以便于完成对腾讯的对接）-->
+		<script src="../app/cos-js-sdk-v5.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../app/jquery-1.4.2.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!--这是html代码，怎么写都行-->
+		<input id="fileSelector" type="file" name="filename">
+		<input id="submitBtn" type="button" onclick="upload()" value="上传">
+		<input id="submitBtn1" type="button" onclick="information()" value="查看服务器文件信息(按F12)">
+		<input id="submitBtn2" type="button" onclick="download()" value="下载不动产数据(geojson)">
+		<a href="../主程序页面.html">返回首页</a>
+		<img src="" id="img0" class="img-thumbnail">
+	</body>
+	<script type="text/javascript">
+
+	 var selectedFile; //选择文件
+	 var filename;   // 文件名字
+	 $("#fileSelector").change(function(){  //这是用户操作时候执行的函数
+	 	     selectedFile = document.getElementById('fileSelector').files[0]; //通过操作com拿到用户选择的文件，当然这里也可以操作jquery拿数据
+	 	     filename = selectedFile.name; //文件.name是获取源文件的文件名（固定用法）
+	 	     console.log("文件的名字是："+filename);//这行是日志
+		});
+	 function upload(){
+	 	/*这部分是获取签名*/
+		var cos = new COS({
+	     SecretId:  'AKIDaw9Qozv2qujZCmsAamLe0Hn47vUml0Ih',
+         SecretKey: 'PYQ3C6lSuQ3QZY6PTZWEgz7APOVkuMXV',
+		 });
+		/*这部分是腾讯提供的上传的接口*/
+			cos.putObject({
+		    Bucket: 'chengzeeyo-1302743114',  //存储桶用户识别   （必须有）
+		    Region: 'ap-chongqing',     //地区识别（必须有）
+		    Key: filename,  //文件名字（这里需要注意的是，如果名字是一样的，那么后面的会覆盖前面的，所以这个名字不可以重复）（必须有）
+		    StorageClass: 'STANDARD',//可以不写
+		    Body: selectedFile, //上传文件对象（可以不写）
+		    onProgress: function(progressData) {
+		        console.log(""+JSON.stringify(progressData));
+		    }
+		}, function(err, data) {
+			/*这里是为了调试你的代码，可以拿到报错信息*/
+		    console.log(err || data);
+		    console.log(data.Location);//可以拿到文件地址
+			window.alert("上传成功")
+		});
+	 }
+		function information(){
+	 	/*这部分是获取签名*/
+		var cos = new COS({
+	     SecretId:  'AKIDaw9Qozv2qujZCmsAamLe0Hn47vUml0Ih',
+         SecretKey: 'PYQ3C6lSuQ3QZY6PTZWEgz7APOVkuMXV',
+		 });
+		/*这部分是腾讯提供的查询的接口*/
+			cos.getBucket({
+				Bucket: 'chengzeeyo-1302743114', /* 必须 */
+				Region: 'ap-chongqing',     /* 必须 */
+				Delimiter: '/',
+			}, function(err, data) {
+				// console.log(err || data.Contents);
+				var jsonData = JSON.stringify(data);
+				var result = $.parseJSON(jsonData);
+				console.log(result)
+			});
+	 }
+		function download(){
+	 	/*这部分是获取签名*/
+		var cos = new COS({
+	     SecretId:  'AKIDaw9Qozv2qujZCmsAamLe0Hn47vUml0Ih',
+         SecretKey: 'PYQ3C6lSuQ3QZY6PTZWEgz7APOVkuMXV',
+		 });
+		/*这部分是腾讯提供的下载的接口*/
+		cos.getObject({
+			Bucket: 'chengzeeyo-1302743114', /* 必须 */
+			Region: 'ap-chongqing',    /* 必须 */
+			Key: 'line-solid.gif',              /* 必须 */
+			// 函数需修改
+			Output: './download',
+			}, function(err, data) {
+				console.log(err || data);
+			});
+	 }
+	</script>
+</html>
